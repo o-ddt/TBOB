@@ -1,0 +1,13 @@
+{
+    "id": "TBOI",
+    "name": "The Binding of Balatro",
+    "author": ["@terry_ntg"],
+    "description": "Adds cards of Isaac characters",
+    "prefix": "tboi",
+    "main_file": "main.lua",
+    "badge_colour": "f1687a",
+    "dependencies": [
+        "Steamodded (>=1.0.0~ALPHA-1225a)"
+    ],
+    "version": "1.0.0"
+}
