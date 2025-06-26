@@ -1,5 +1,5 @@
 # The Binding of Balatro (Isaac)
-**REQUIRES Steamodded and Lovely.**<br>
+**REQUIRES Steamodded and Lovely.** <br>
 
 [Latest Release of Steammodded](github.com/Steamodded/smods/releases/latest)<br>
 [Latest Release of Lovely](github.com/ethangreen-dev/lovely-injector/releases/latest)
@@ -14,7 +14,8 @@ Aswell as:<br>
 Stable:<br>
 + Download the latest release zip,<br>
 + Extract into your Balatro mods folder (%appdata%\Balatro\Mods)<br>
+
 Beta:<br>
-'(MAY BE BUGGY)'<br>
+**(MAY BE BUGGY)**
 + Download the source code as a ZIP file,<br>
 + Extract into your Balatro mods folder (%appdata%\Balatro\Mods)<br>
