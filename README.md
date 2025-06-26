@@ -8,8 +8,8 @@ Adds isaac characters, items, and other things into Balatro.<br>
 The binding of Balatro currently adds:<br>
 ![image](https://github.com/user-attachments/assets/3dba582b-055b-42c2-aaa2-81400f22a00e)<br>
 Aswell as:<br>
-+Music replacements<br>
-+-- will add more<br>
++ Music replacements<br>
++ -- will add more<br>
 # Installation Instructions
 Stable:<br>
 + Download the latest release zip,<br>
