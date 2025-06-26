@@ -1,20 +1,31 @@
 # The Binding of Balatro (Isaac)
->REQUIRES Steamodded and Lovely.<<br>
-Latest Release of Steammodded:
-[](github.com/Steamodded/smods/releases/latest)
-Latest Release of Lovely:
-[](github.com/ethangreen-dev/lovely-injector/releases/latest)
-Adds isaac characters, items, and other things into Balatro.
-The binding of Balatro currently adds:
-![image](https://github.com/user-attachments/assets/3dba582b-055b-42c2-aaa2-81400f22a00e)
-Aswell as:
-Music replacements
--- will add more
+
+**REQUIRES Steamodded and Lovely.**<br>
+
+Latest Release of Steammodded:<br>
+
+[](github.com/Steamodded/smods/releases/latest)<br>
+
+Latest Release of Lovely:<br>
+
+[](github.com/ethangreen-dev/lovely-injector/releases/latest)<br>
+
+Adds isaac characters, items, and other things into Balatro.<br>
+
+The binding of Balatro currently adds:<br>
+
+![image](https://github.com/user-attachments/assets/3dba582b-055b-42c2-aaa2-81400f22a00e)<br>
+
+Aswell as:<br>
+
++Music replacements<br>
++-- will add more<br>
+
 # Installation Instructions
-Stable:
-+ Download the latest release zip,
-+ Extract into your Balatro mods folder (%appdata%\Balatro\Mods)
-Beta:
-'(MAY BE BUGGY)'
-+ Download the source code as a ZIP file,
-+ Extract into your Balatro mods folder (%appdata%\Balatro\Mods)
+Stable:<br>
++ Download the latest release zip,<br>
++ Extract into your Balatro mods folder (%appdata%\Balatro\Mods)<br>
+Beta:<br>
+'(MAY BE BUGGY)'<br>
++ Download the source code as a ZIP file,<br>
++ Extract into your Balatro mods folder (%appdata%\Balatro\Mods)<br>
