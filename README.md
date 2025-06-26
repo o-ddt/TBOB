@@ -1,7 +1,7 @@
 # The Binding of Balatro (Isaac)
 **REQUIRES Steamodded and Lovely.**<br>
 
-[Latest Release of Steammodded](github.com/Steamodded/smods/releases/latest)
+[Latest Release of Steammodded](github.com/Steamodded/smods/releases/latest)<br>
 [Latest Release of Lovely](github.com/ethangreen-dev/lovely-injector/releases/latest)
 
 Adds isaac characters, items, and other things into Balatro.<br>
