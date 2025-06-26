@@ -17,6 +17,6 @@ Stable:<br>
 + Download the latest release zip,<br>
 + Extract into your Balatro mods folder (%appdata%\Balatro\Mods)<br>
 
-Beta: **(MAY BE BUGGY)** <br>
+Beta: **(NOT RECOMMENDED)** <br>
 + Download the source code as a ZIP file,<br>
 + Extract into your Balatro mods folder (%appdata%\Balatro\Mods)<br>
