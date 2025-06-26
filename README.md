@@ -10,6 +10,7 @@ The binding of Balatro currently adds:<br>
 Aswell as:<br>
 + Music replacements<br>
 + -- will add more<br>
+(dont mind the cats, those are just placeholders until my artist draws the joker)<br>
 # Installation Instructions
 Stable:<br>
 + Download the latest release zip,<br>
