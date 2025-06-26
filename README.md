@@ -1,5 +1,5 @@
 # The Binding of Balatro (Isaac)
->REQUIRES Steamodded and Lovely.<br>
+>REQUIRES Steamodded and Lovely.<<br>
 Latest Release of Steammodded:
 [](github.com/Steamodded/smods/releases/latest)
 Latest Release of Lovely:
