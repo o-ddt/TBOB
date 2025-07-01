@@ -6,10 +6,12 @@
 
 Adds isaac characters, items, and other things into Balatro.<br>
 The binding of Balatro currently adds:<br>
-![image](https://github.com/user-attachments/assets/3dba582b-055b-42c2-aaa2-81400f22a00e)<br>
+![image](https://github.com/user-attachments/assets/6553c49c-6c91-4811-b93f-097560905c81)<br>
 Aswell as:<br>
 + Music replacements<br>
-+ -- will add more<br>
++ Live(ish) Isaac concurrent players<br>
++ Unbalanced Jokers and Consumables
++ and so much more i think
 
 (dont mind the cats, those are just placeholders until my artist draws the joker)<br>
 # Installation Instructions
