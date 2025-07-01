@@ -64,5 +64,4 @@ assert(SMODS.load_file("src/tarots.lua"))()
 assert(SMODS.load_file("libs/qolfunctions.lua"))()
 assert(SMODS.load_file("libs/overrides.lua"))()
 assert(SMODS.load_file("libs/content.lua"))()
-
---assert(SMODS.load_file("libs/timer.lua"))() will implement differently, currently freezes
+assert(SMODS.load_file("libs/timer.lua"))()

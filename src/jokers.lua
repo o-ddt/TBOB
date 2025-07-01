@@ -270,6 +270,14 @@ SMODS.Joker{
 	end
 }
 
+SMODS.Atlas {
+	key = "megafatt",
+	path = "megafatty.png",
+	px = 142,
+	py = 95
+}
+
+
 SMODS.Joker{
     key = 'megafat',
 	loc_txt = {
@@ -281,11 +289,12 @@ SMODS.Joker{
 	},
 	config = {extra = {jokers = 1, Xmult = 10}},
 	rarity = 3,
-	atlas = 'placeholder',
+	atlas = 'megafatt',
 	cost = 15,
     discovered = true,
     blueprint_compat = true,
     pos = {x=0, y= 0},
+	display_size = { w = 1 * 142, h = 1 * 95 },
 	loc_vars = function (self, info_queue, card)
 		return {vars = {card.ability.extra.jokers, card.ability.extra.Xmult}}
 	end,
@@ -448,6 +457,14 @@ SMODS.Joker{
 	end
 }
 
+SMODS.Atlas {
+	key = "school",
+	path = "schoolbag.png",
+	px = 71,
+	py = 95
+}
+
+
 SMODS.Joker{
     key = 'schhol',
 	loc_txt = {
@@ -458,7 +475,7 @@ SMODS.Joker{
 	},
 	config = {extra = {jokers = 1}},
 	rarity = 2,
-	atlas = 'placeholder',
+	atlas = 'school',
 	cost = 6,
     discovered = true,
     blueprint_compat = false,
@@ -505,7 +522,12 @@ function SMODS.four_fingers()
     return smods_four_fingers_ref()
 end
 
---isaac.player_count = 15858
+SMODS.Atlas {
+	key = "brokeymodem",
+	path = "brokenmodem.png",
+	px = 71,
+	py = 95
+}
 
 SMODS.Joker{
 	key = 'brokeymodey',
@@ -520,8 +542,9 @@ SMODS.Joker{
 	},
 	config = {extra = {mult = 0.25}},
 	rarity = 4,
-	atlas = 'placeholder',
+	atlas = 'brokeymodem',
 	pos = {x=0,y=0},
+	soul_pos = {x=1,y=0},
 	cost = 20,
 	discovered = true,
 	blueprint_compat = true,
