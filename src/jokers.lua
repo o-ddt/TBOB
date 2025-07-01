@@ -123,7 +123,7 @@ SMODS.Joker{
 			"{C:inactive}Currently {}{X:mult,C:white}X#4#{}{C:inactive} Mult, {}{C:mult}+#5#{}{C:inactive} Mult, and {}{C:chips}+#6#{}{C:inactive} Chips.{}"
 		}
 	},
-	config = { extra = { OXmult = 1, Omult = 2, Ochips = 2} },
+	config = { extra = { Xmult = 1, Omult = 2, Ochips = 2} },
 	rarity = 4,
 	atlas = 'cain',
 	pos = { x = 0, y = 0 },
@@ -133,14 +133,14 @@ SMODS.Joker{
 	blueprint_compat = true,
 	eternal_compat = true,
 	loc_vars =  function (self, info_queue, card)
-		return { vars = { card.ability.extra.OXmult, card.ability.extra.Omult, card.ability.extra.Ochips, card.ability.extra.OXmult*(G.jokers and #G.jokers.cards or 1), card.ability.extra.Omult * math.max(0, (G.GAME.dollars + (G.GAME.dollar_buffer or 0))), math.max(0, card.ability.extra.Ochips * (G.playing_cards and (#G.playing_cards) or 0)) } }
+		return { vars = { card.ability.extra.Xmult, card.ability.extra.Omult, card.ability.extra.Ochips, card.ability.extra.Xmult*(G.jokers and #G.jokers.cards or 1), card.ability.extra.Omult * math.max(0, (G.GAME.dollars + (G.GAME.dollar_buffer or 0))), math.max(0, card.ability.extra.Ochips * (G.playing_cards and (#G.playing_cards) or 0)) } }
 	end,
 	calculate = function(self,card,context)
 		if context.joker_main then
 			return {
 				chips = math.max(0, card.ability.extra.Ochips * (G.playing_cards and (#G.playing_cards) or 0)),
 				mult = card.ability.extra.Omult * math.max(0, (G.GAME.dollars + (G.GAME.dollar_buffer or 0))),
-				Xmult = card.ability.extra.OXmult * #G.jokers.cards
+				Xmult = card.ability.extra.Xmult * #G.jokers.cards
 			}
 		end
 	end
@@ -279,7 +279,7 @@ SMODS.Joker{
 			"{X:mult,C:white}X#2# {} Mult"
 		}
 	},
-	config = {extra = {jokers = 1, xmult = 10}},
+	config = {extra = {jokers = 1, Xmult = 10}},
 	rarity = 3,
 	atlas = 'placeholder',
 	cost = 15,
@@ -287,7 +287,7 @@ SMODS.Joker{
     blueprint_compat = true,
     pos = {x=0, y= 0},
 	loc_vars = function (self, info_queue, card)
-		return {vars = {card.ability.extra.jokers, card.ability.extra.xmult}}
+		return {vars = {card.ability.extra.jokers, card.ability.extra.Xmult}}
 	end,
 	add_to_deck = function(self, card, from_debuff)
         G.jokers.config.card_limit = G.jokers.config.card_limit - card.ability.extra.jokers
@@ -299,7 +299,7 @@ SMODS.Joker{
 	calculate = function (self,card,context)
 		if context.joker_main then
 			return{
-				Xmult = card.ability.extra.xmult
+				Xmult = card.ability.extra.Xmult
 			}
 		end
 	end
@@ -504,3 +504,35 @@ function SMODS.four_fingers()
     end
     return smods_four_fingers_ref()
 end
+
+--isaac.player_count = 15858
+
+SMODS.Joker{
+	key = 'brokeymodey',
+	loc_txt = {
+		name = "Broken Modem",
+		text = {
+			"Gives {X:chips,C:white}X#1#{} chips",
+			"for every concurrent player on",
+			"{C:red}The Binding of Isaac: Rebirth{}",
+			"{C:inactive}Currently {}{X:chips,C:white}X#2#{}{C:inactive} chips.{}"
+		}
+	},
+	config = {extra = {mult = 0.25}},
+	rarity = 4,
+	atlas = 'placeholder',
+	pos = {x=0,y=0},
+	cost = 20,
+	discovered = true,
+	blueprint_compat = true,
+	loc_vars = function (self,info_queue,card)
+		return {vars = {card.ability.extra.mult,isaac.player_count*card.ability.extra.mult}}
+	end,
+	calculate = function (self,card,context)
+		if context.joker_main then
+			return {
+				xchips = isaac.player_count*card.ability.extra.mult
+			}
+		end
+	end
+}

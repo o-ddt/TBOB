@@ -12,7 +12,7 @@ function Card:click()
                 isaac.spawn = false
 			end
 		else
-            isaac.UsePill()
+            print((G.GAME.blind:get_type()))
         end
 	end
 	CardClickRef(self)

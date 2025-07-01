@@ -46,3 +46,45 @@ SMODS.Consumable {
         end
     end
 }
+
+SMODS.Consumable {
+    key = 'diplo',
+    loc_txt = {
+        name = "Diplopia",
+        text = {
+            "Doubles the values of all owned jokers",
+            "(if possible)"
+        }
+    },
+    set = 'Tarot',
+    pos = {x=7,y=2},
+    discovered = true,
+    use = function (self,card,area,copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = after,
+            delay = 0.4,
+            func = function ()
+                for i=1, (G.jokers and (#G.jokers.cards)) do
+                    local card2 = G.jokers.cards[i]
+                    for i,v in pairs(card2.ability) do
+                        if type(v) == 'table' then
+                            for i2,v in pairs(card2.ability[i]) do
+                                if type(card2.ability[i][i2]) == "number" then
+                                    card2.ability[i][i2] = card2.ability[i][i2] * 2
+                                end
+                            end
+                        elseif type(v) == "number" then
+                            card2.ability[i] = card2.ability[i] * 2
+                        end
+                    end
+                end
+                card:juice_up(0.3,0.5)
+                SMODS.calculate_effect({ message = "*2" }, card)
+                return true
+            end
+        }))
+    end,
+    can_use = function (self,card)
+        return (G.jokers and (#G.jokers.cards >= 1))
+    end
+}
