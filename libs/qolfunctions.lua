@@ -3,6 +3,7 @@ isaac.spawn = false
 
 local CardClickRef = Card.click;
 function Card:click()
+    isaac.update_member_count() -- basically live updating idfk
 	if G.OVERLAY_MENU then
 		local _card = self;
 		if isaac.spawn then
@@ -11,8 +12,6 @@ function Card:click()
 				_card:set_sprites(_card.config.center)
                 isaac.spawn = false
 			end
-		else
-            print((G.GAME.blind:get_type()))
         end
 	end
 	CardClickRef(self)
