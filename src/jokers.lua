@@ -180,140 +180,6 @@ SMODS.Joker{
     end
 }
 
-SMODS.Joker{
-	key = 'T. Bethany',
-	loc_txt = {
-		name = "Tainted Bethany",
-		text = {
-			"At the start of every boss blind,",
-			"creates a random negative perishable joker."
-		}
-	},
-	config = { extra = {} },
-	rarity = 3,
-	atlas = 'placeholder',
-	pos = {x=0,y=0},
-	cost = 8,
-	discovered = true,
-	blueprint_compat = true,
-	perishable_compat = true,
-	calculate = function (self,card,context)
-		if context.setting_blind and context.blind.boss then
-			return {
-				func = function ()
-					G.E_MANAGER:add_event(Event({
-                        func = function()
-                            G.E_MANAGER:add_event(Event({
-								trigger = 'after',
-           						delay = 0.4,
-                                func = function()
-            	                    play_sound('tboi_thumbsup')
-					                SMODS.add_card({ set = 'Joker', stickers = {"perishable"}, edition = "e_negative" })
-				    	            card:juice_up(0.3, 0.5)
-                					return true
-                                end
-                            }))
-                            SMODS.calculate_effect({ message = "lemegeton" }, card)
-                            return true
-                        end
-                    }))
-				end
-			}
-		end
-	end
-}
-
-SMODS.Joker{
-	key = 'monstro',
-	loc_txt = {
-		name = 'Monstro',
-		text = {
-			"At the start of every blind,",
-			"destroy a random playing card",
-			"and add {C:mult}+#1#{} Mult.",
-			"{C:inactive}Currently {}{C:mult}+#2#{}{C:inactive} Mult.{}"
-		}
-	},
-	config = {extra = {incr = 5, amnt = 0}},
-	rarity = 2,
-	atlas = 'placeholder',
-	pos = {x=0,y=0},
-	cost = 6,
-	discovered = true,
-	blueprint_compat = true,
-	loc_vars = function (self, info_queue, card)
-		return { vars = { card.ability.extra.incr,card.ability.extra.amnt } }
-	end,
-	calculate = function (self,card,context)
-		if context.setting_blind then
-			local rng = math.random(1,#G.playing_cards)
-			card.ability.extra.amnt = card.ability.extra.amnt + card.ability.extra.incr
-			G.E_MANAGER:add_event(Event({
-				trigger = 'after',
-				delay = 0.2,
-				func = function ()
-					play_sound('timpani')
-					SMODS.destroy_cards(G.playing_cards[rng])
-					card:juice_up(0.3, 0.5)
-					return true
-				end
-			}))
-			return{
-				message = "+5"
-			}
-		end
-		if context.joker_main then
-			return {
-				mult = card.ability.extra.amnt
-			}
-		end
-	end
-}
-
-SMODS.Atlas {
-	key = "megafatt",
-	path = "megafatty.png",
-	px = 142,
-	py = 95
-}
-
-
-SMODS.Joker{
-    key = 'megafat',
-	loc_txt = {
-		name = "Mega Fatty",
-		text = {
-			"{C:red}-#1# {}Joker Slot,",
-			"{X:mult,C:white}X#2# {} Mult"
-		}
-	},
-	config = {extra = {jokers = 1, Xmult = 10}},
-	rarity = 3,
-	atlas = 'megafatt',
-	cost = 15,
-    discovered = true,
-    blueprint_compat = true,
-    pos = {x=0, y= 0},
-	display_size = { w = 1 * 142, h = 1 * 95 },
-	loc_vars = function (self, info_queue, card)
-		return {vars = {card.ability.extra.jokers, card.ability.extra.Xmult}}
-	end,
-	add_to_deck = function(self, card, from_debuff)
-        G.jokers.config.card_limit = G.jokers.config.card_limit - card.ability.extra.jokers
-    end,
-
-    remove_from_deck = function(self, card, from_debuff)
-		G.jokers.config.card_limit = G.jokers.config.card_limit + card.ability.extra.jokers
-	end,
-	calculate = function (self,card,context)
-		if context.joker_main then
-			return{
-				Xmult = card.ability.extra.Xmult
-			}
-		end
-	end
-}
-
 SMODS.Atlas {
 	key = "lost",
 	path = "lost.png",
@@ -372,6 +238,155 @@ SMODS.Joker{
 	end
 }
 
+SMODS.Atlas {
+	key = "megafatt",
+	path = "megafatty.png",
+	px = 142,
+	py = 95
+}
+
+SMODS.Joker{
+    key = 'megafat',
+	loc_txt = {
+		name = "Mega Fatty",
+		text = {
+			"{C:red}-#1# {}Joker Slot,",
+			"{X:mult,C:white}X#2# {} Mult"
+		}
+	},
+	config = {extra = {jokers = 1, Xmult = 10}},
+	rarity = 3,
+	atlas = 'megafatt',
+	cost = 15,
+    discovered = true,
+    blueprint_compat = true,
+    pos = {x=0, y= 0},
+	display_size = { w = 1 * 142, h = 1 * 95 },
+	loc_vars = function (self, info_queue, card)
+		return {vars = {card.ability.extra.jokers, card.ability.extra.Xmult}}
+	end,
+	add_to_deck = function(self, card, from_debuff)
+        G.jokers.config.card_limit = G.jokers.config.card_limit - card.ability.extra.jokers
+    end,
+
+    remove_from_deck = function(self, card, from_debuff)
+		G.jokers.config.card_limit = G.jokers.config.card_limit + card.ability.extra.jokers
+	end,
+	calculate = function (self,card,context)
+		if context.joker_main then
+			return{
+				Xmult = card.ability.extra.Xmult
+			}
+		end
+	end
+}
+
+SMODS.Atlas {
+	key = "monster",
+	path = "monstro.png",
+	px = 71,
+	py = 95
+}
+
+
+SMODS.Joker{
+	key = 'monstro',
+	loc_txt = {
+		name = 'Monstro',
+		text = {
+			"At the start of every blind,",
+			"destroy a random playing card",
+			"and add {C:mult}+#1#{} Mult.",
+			"{C:inactive}Currently {}{C:mult}+#2#{}{C:inactive} Mult.{}"
+		}
+	},
+	config = {extra = {incr = 5, amnt = 0}},
+	rarity = 2,
+	atlas = 'monster',
+	pos = {x=0,y=0},
+	cost = 6,
+	discovered = true,
+	blueprint_compat = true,
+	loc_vars = function (self, info_queue, card)
+		return { vars = { card.ability.extra.incr,card.ability.extra.amnt } }
+	end,
+	calculate = function (self,card,context)
+		if context.setting_blind then
+			local rng = math.random(1,#G.playing_cards)
+			card.ability.extra.amnt = card.ability.extra.amnt + card.ability.extra.incr
+			G.E_MANAGER:add_event(Event({
+				trigger = 'after',
+				delay = 0.2,
+				func = function ()
+					play_sound('timpani')
+					SMODS.destroy_cards(G.playing_cards[rng])
+					card:juice_up(0.3, 0.5)
+					return true
+				end
+			}))
+			return{
+				message = "+5"
+			}
+		end
+		if context.joker_main then
+			return {
+				mult = card.ability.extra.amnt
+			}
+		end
+	end
+}
+
+
+SMODS.Joker{
+	key = 'T. Bethany',
+	loc_txt = {
+		name = "Tainted Bethany",
+		text = {
+			"At the start of every boss blind,",
+			"creates a random negative perishable joker."
+		}
+	},
+	config = { extra = {} },
+	rarity = 3,
+	atlas = 'placeholder',
+	pos = {x=0,y=0},
+	cost = 8,
+	discovered = true,
+	blueprint_compat = true,
+	perishable_compat = true,
+	calculate = function (self,card,context)
+		if context.setting_blind and context.blind.boss then
+			return {
+				func = function ()
+					G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.E_MANAGER:add_event(Event({
+								trigger = 'after',
+           						delay = 0.4,
+                                func = function()
+            	                    play_sound('tboi_thumbsup')
+					                SMODS.add_card({ set = 'Joker', stickers = {"perishable"}, edition = "e_negative" })
+				    	            card:juice_up(0.3, 0.5)
+                					return true
+                                end
+                            }))
+                            SMODS.calculate_effect({ message = "lemegeton" }, card)
+                            return true
+                        end
+                    }))
+				end
+			}
+		end
+	end
+}
+
+SMODS.Atlas {
+	key = "delirim",
+	path = "delirim.png",
+	px = 71,
+	py = 95
+}
+
 SMODS.Joker{
 	key = 'delirium',
 	loc_txt = {
@@ -383,7 +398,7 @@ SMODS.Joker{
 	},
 	config = {extra = {price = 0}},
 	rarity = 3,
-	atlas = "placeholder",
+	atlas = "delirim",
 	pos = {x=0,y=0},
 	cost = 8,
 	discovered = true,
@@ -492,6 +507,13 @@ SMODS.Joker{
 	end,
 }
 
+SMODS.Atlas {
+	key = "taisic",
+	path = "taisaac.png",
+	px = 71,
+	py = 95
+}
+
 SMODS.Joker{
 	key = 'tissac',
 	loc_txt = {
@@ -504,7 +526,7 @@ SMODS.Joker{
 	},
 	config = {extra = {size = 3}},
 	rarity = 3,
-	atlas = 'placeholder',
+	atlas = 'taisic',
 	pos = {x=0,y=0},
 	cost = 20,
 	discovered = true,

@@ -3,7 +3,14 @@ isaac.spawn = false
 
 local CardClickRef = Card.click;
 function Card:click()
-    isaac.update_member_count() -- basically live updating idfk
+    if isaac_config.liveupdate then
+        isaac.update_member_count() -- basically live updating idfk
+    else
+        local rng = math.random(1,60)
+        if rng == 60 then
+            isaac.update_member_count() -- basically not live because rare idk
+        end
+    end
 	if G.OVERLAY_MENU then
 		local _card = self;
 		if isaac.spawn then

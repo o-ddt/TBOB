@@ -13,7 +13,7 @@ local function apply_players(code, body, headers)
 	end
 end
 function isaac.update_member_count()
-	if https and https.asyncRequest then
+	if isaac_config.http and https and https.asyncRequest then
 			https.asyncRequest(
 				"http://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=250900", -- cryptid discord thing uses time or smth idk steam is just a get request with no headers
 				apply_players

@@ -1,11 +1,12 @@
 -- mainly for music overrides
 
+
 SMODS.Sound({
 	key = "music_isaac",
 	path = "music_isaac.ogg",
 	pitch = 1,
 	select_music_track = function()
-        return (G.GAME.blind and G.GAME.blind:get_type() and not (G.GAME.blind:get_type() == 'Boss') and not (G.shop) and not (G.MAIN_MENU_UI) and not (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED))
+        return (G.GAME.blind and G.GAME.blind:get_type() and not (G.GAME.blind:get_type() == 'Boss') and not (G.shop) and not (G.MAIN_MENU_UI) and not (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and isaac_config.custom_music)
 	end,
 })
 
@@ -14,7 +15,7 @@ SMODS.Sound({
 	path = "music_isaac_boss.ogg",
 	pitch = 1,
 	select_music_track = function()
-        return (G.GAME.blind and G.GAME.blind:get_type() == 'Boss')
+        return (G.GAME.blind and G.GAME.blind:get_type() == 'Boss' and isaac_config.custom_music)
 	end,
 })
 
@@ -23,7 +24,7 @@ SMODS.Sound({
 	path = "music_isaac_shop.ogg",
 	pitch = 1,
 	select_music_track = function()
-        return (G.shop and not (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED))
+        return (G.shop and not (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED)and isaac_config.custom_music)
 	end,
 })
 
@@ -32,7 +33,7 @@ SMODS.Sound({
 	path = "music_isaac_title.ogg",
 	pitch = 1,
 	select_music_track = function()
-        return (G.MAIN_MENU_UI)
+        return (G.MAIN_MENU_UI and isaac_config.custom_music)
 	end,
 })
 
@@ -42,7 +43,7 @@ SMODS.Sound({
 	pitch = 1,
 	sync = false,
 	select_music_track = function()
-        return (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED)
+        return (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED and isaac_config.custom_music)
 	end,
 })
 
@@ -51,6 +52,6 @@ SMODS.Sound({
 	path = "music_isaac_blindselect.ogg",
 	pitch = 1,
 	select_music_track = function()
-        return (G.GAME.blind and G.GAME.blind:get_type() == nil)
+        return (G.GAME.blind and G.GAME.blind:get_type() == nil and isaac_config.custom_music)
 	end,
 })

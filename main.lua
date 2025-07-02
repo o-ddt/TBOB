@@ -5,6 +5,8 @@ end
 -- this is copy and pasted from cryptid mod, im so sorry the devs that had to write this code just for people to steal it
 local mod_path = "" .. SMODS.current_mod.path -- this path changes when each mod is loaded, but the local variable will retain mod path
 isaac.path = mod_path
+isaac_config = SMODS.current_mod.config or {}
+
 SMODS.current_mod.optional_features = {
 	retrigger_joker = true,
 	post_trigger = true,
@@ -65,3 +67,62 @@ assert(SMODS.load_file("libs/qolfunctions.lua"))()
 assert(SMODS.load_file("libs/overrides.lua"))()
 assert(SMODS.load_file("libs/content.lua"))()
 assert(SMODS.load_file("libs/timer.lua"))()
+
+local isaacconfig = function()
+	isaac_nodes = {
+		{
+			n = G.UIT.R,
+			config = { align = "cm" },
+			nodes = {
+				{
+					n = G.UIT.O,
+					config = {
+						object = DynaText({
+							string = "Isaac Mod Config",
+							colours = { G.C.WHITE },
+							shadow = true,
+							scale = 0.4,
+						}),
+					},
+				},
+			},
+		},
+	}
+	left_settings = { n = G.UIT.C, config = { align = "tl", padding = 0.05 }, nodes = {} }
+	right_settings = { n = G.UIT.C, config = { align = "tl", padding = 0.05 }, nodes = {} }
+	config = { n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = { left_settings, right_settings } }
+	isaac_nodes[#isaac_nodes + 1] = config
+		isaac_nodes[#isaac_nodes + 1] = create_toggle({
+		label = "Enable Isaac music",
+		active_colour = HEX("00FF7F"),
+		ref_table = isaac_config,
+		ref_value = "custom_music",
+	})
+	isaac_nodes[#isaac_nodes + 1] = create_toggle({
+		label = "Enable HTTPS module",
+		active_colour = HEX("00FF7F"),
+		ref_table = isaac_config,
+		ref_value = "http",
+	})
+	isaac_nodes[#isaac_nodes + 1] = create_toggle({
+		label = '"Live" updating HTTPS module',
+		active_colour = HEX("00FF7F"),
+		ref_table = isaac_config,
+		ref_value = "liveupdate",
+	})
+	return {
+		n = G.UIT.ROOT,
+		config = {
+			emboss = 0.05,
+			minh = 6,
+			r = 0.1,
+			minw = 10,
+			align = "cm",
+			padding = 0.2,
+			colour = G.C.BLACK,
+		},
+		nodes = isaac_nodes,
+	}
+end
+
+SMODS.current_mod.config_tab = isaacconfig

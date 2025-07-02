@@ -1,6 +1,14 @@
+SMODS.Atlas {
+	key = "riged",
+	path = "rigged.png",
+	px = 71,
+	py = 95
+}
+
 SMODS.Back{
     name = "Rigged Deck",
     key = "d6",
+    atlas = 'riged',
     pos = {x = 0, y = 0},
     config = {probability = 1000},
     loc_txt = {
