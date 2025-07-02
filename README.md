@@ -5,6 +5,8 @@
 [Latest Release of Lovely](github.com/ethangreen-dev/lovely-injector/releases/latest)
 
 Adds isaac characters, items, and other things into Balatro.<br>
+![image](https://github.com/user-attachments/assets/6649f026-11ed-4c79-b9f8-bad0ed0f2852)<br>
+
 The binding of Balatro currently adds:<br>
 ![image](https://github.com/user-attachments/assets/6553c49c-6c91-4811-b93f-097560905c81)<br>
 Aswell as:<br>
