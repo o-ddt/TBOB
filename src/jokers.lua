@@ -324,7 +324,7 @@ SMODS.Joker{
 					return true
 				end
 			}))
-			return{
+			return {
 				message = "+5"
 			}
 		end
@@ -580,4 +580,93 @@ SMODS.Joker{
 			}
 		end
 	end
+}
+
+SMODS.Joker {
+    key = "momknife",
+	loc_txt = {
+		name = "Mom's Knife",
+		text = {
+			"At the start of every blind,",
+			"{C:attention}Absorbs {}the joker to the right",
+			"and adds it to this jokers {C:attention}Calculation.{}",
+			"{C:inactive}``ISAAC!``{}"
+		}
+	},
+    blueprint_compat = true,
+    perishable_compat = false,
+	discovered = true,
+    rarity = 4,
+    cost = 2,
+	atlas = 'placeholder',
+    pos = { x = 0, y = 0 },
+    config = { extra = { jokers = {} } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { } }
+    end,
+    calculate = function(self, card, context)
+        if context.setting_blind and not context.blueprint then -- stole this from vanilla remade's ceremonial dagger cause im to lazy to code
+            local my_pos = nil
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i] == card then
+                    my_pos = i
+                    break
+                end
+            end
+            if my_pos and G.jokers.cards[my_pos + 1] and not G.jokers.cards[my_pos + 1].ability.eternal and not G.jokers.cards[my_pos + 1].getting_sliced then
+                local sliced_card = G.jokers.cards[my_pos + 1]
+				card.ability.extra.jokers[#card.ability.extra.jokers+1] = sliced_card
+				local variables = inspectDepth(sliced_card.ability)
+				local data = isaac.parse_table_with_nested_sections(variables)
+				for i = 1, #data, 2 do
+ 					local key = data[i]
+    				local value = data[i + 1]
+    				if key == "name" or key == "set" or key == "type" or key == "hands_played_at_create" or key == "order" then
+						goto continue
+					end
+					if key == "extra" and type(value) == "table" then
+						for i=1,#value,2 do
+		 					local key2 = value[i]
+    						local value2 = value[i + 1]
+							if tonumber(value2) and card.ability.extra[key2] and type(card.ability.extra[key2]) == "number" then
+								card.ability.extra[key2] = card.ability.extra[key2] + tonumber(value2)
+							elseif tonumber(value2) and (not card.ability.extra[key2] or type(card.ability.extra[key2]) ~= "number") then
+								card.ability.extra[key2] = tonumber(value2)
+							else
+								card.ability.extra[key2] = value2
+							end
+						end
+					end
+					if tonumber(value) and card.ability.extra[key] and type(card.ability.extra[key]) == "number" then
+						card.ability.extra[key] = card.ability.extra[key] + tonumber(value)
+					elseif tonumber(value) and (not card.ability.extra[key] or type(card.ability.extra[key]) ~= "number") then
+						card.ability.extra[key] = tonumber(value)
+					else
+						card.ability.extra[key] = value
+					end
+				    ::continue::
+				end
+                sliced_card.getting_sliced = true -- Make sure to do this on destruction effects
+                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        G.GAME.joker_buffer = 0
+                        card:juice_up(0.8, 0.8)
+                        sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
+                        play_sound('slice1', 0.96 + math.random() * 0.08)
+                        return true
+                    end
+                }))
+                return {
+                    message = localize { type = 'description', key = 'Joker', vars = { sliced_card.calculate } },
+                    colour = G.C.RED,
+                    no_juice = true,
+					--isaac.momsknifefunc(card.ability.extra.jokers,context)
+                }
+            end
+        end
+		if context.joker_main then
+			return isaac.momsknifefunc(card.ability.extra.jokers,context)
+		end
+    end
 }

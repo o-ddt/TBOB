@@ -6,7 +6,7 @@ SMODS.Sound({
 	path = "music_isaac.ogg",
 	pitch = 1,
 	select_music_track = function()
-        return (G.GAME.blind and G.GAME.blind:get_type() and not (G.GAME.blind:get_type() == 'Boss') and not (G.shop) and not (G.MAIN_MENU_UI) and not (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED) and isaac_config.custom_music)
+        return (G.GAME.blind and G.GAME.blind:get_type() and not (G.GAME.blind:get_type() == 'Boss') and not (G.shop) and not (G.MAIN_MENU_UI) and not (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.SMODS_BOOSTER_OPENED or G.STATE == G.STATES.GAME_OVER) and isaac_config.custom_music)
 	end,
 })
 
@@ -53,5 +53,14 @@ SMODS.Sound({
 	pitch = 1,
 	select_music_track = function()
         return (G.GAME.blind and G.GAME.blind:get_type() == nil and isaac_config.custom_music)
+	end,
+})
+
+SMODS.Sound({
+	key = "music_isaac_lose",
+	path = "music_isaac_gameover.ogg",
+	pitch = 1,
+	select_music_track = function()
+        return (G.STATE == G.STATES.GAME_OVER and isaac_config.custom_music)
 	end,
 })

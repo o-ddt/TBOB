@@ -29,3 +29,38 @@ SMODS.Back{
         }))
     end
 }
+
+SMODS.Back{
+    name = "Eden's Blessing",
+    key = "blesseden",
+    pos = {x = 1, y = 0},
+    config = {},
+    loc_txt = {
+        name ="Eden's Blessing",
+        text={
+            "Start with a random",
+            "{C:attention}Consumable {}and {C:attention}Joker{}"
+        },
+    },
+    apply = function(self)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                local rng = math.random(1,3)
+                local rng2 = math.random(1,250)
+                if rng == 1 then
+                    SMODS.add_card({ set = 'Spectral', soulable = true })
+                elseif rng == 2 then
+                    SMODS.add_card({ set = 'Tarot', soulable = true })
+                elseif rng == 3 then
+                    SMODS.add_card({ set = 'Planet', soulable = true })
+                end
+                if rng2 ~= 1 then
+                    SMODS.add_card({ set = 'Joker' })
+                elseif rng2 == 1 then
+                    SMODS.add_card({ set = 'Joker', legendary = true })
+                end
+                return true
+            end
+        }))
+    end
+}

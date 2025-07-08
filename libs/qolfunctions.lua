@@ -124,3 +124,67 @@ isaac.UsePill = function()
         
     end
 end
+
+function isaac.parse_table_with_nested_sections(str)
+    local result = {}
+    local current_nested_key = nil
+    local nested_table = nil
+
+    for line in str:gmatch("[^\r\n]+") do
+        local indent, key, value = line:match("^(%s*)([^:]+):%s*(.*)$")
+        indent = #indent
+
+        if indent == 0 then
+            -- Top-level key
+            if value == "" then
+                -- It's a nested section start, e.g., "extra:"
+                current_nested_key = key
+                nested_table = {}
+            else
+                table.insert(result, key)
+                table.insert(result, value)
+            end
+        elseif indent == 2 and current_nested_key then
+            -- Nested key under previous section
+            table.insert(nested_table, key)
+            table.insert(nested_table, value)
+        end
+
+        -- If we reach a new top-level key after a nested one, store the nested table
+        if indent == 0 and current_nested_key and nested_table then
+            table.insert(result, current_nested_key)
+            table.insert(result, nested_table)
+            current_nested_key = nil
+            nested_table = nil
+        end
+    end
+
+    -- Edge case: if the last line was a nested section, store it
+    if current_nested_key and nested_table then
+        table.insert(result, current_nested_key)
+        table.insert(result, nested_table)
+    end
+
+    return result
+end
+
+function isaac.momsknifefunc(jokers,context)
+    local rtrn = {} -- made this in moms knife so i put it in a global function
+			for i,v in pairs(jokers) do
+				local rtern = v:calculate_joker(context) -- had to dig in balatros source code to find this, i was trying to call the function from the joker itself
+				local string = inspect(rtern)
+				local table = isaac.parse_table_with_nested_sections(string) -- im going to milk this function dry the entire joker i swear to god ive spent like 8 hours coding this joker in total and nothing works please help me i swear to god im going mentally insane
+				for i=1,#table,2 do
+					local key = table[i] -- i literally used chatgpt for this function because im so tired of iterating through millions of fucking tables
+					local value = table[i+1]
+					if tonumber(value) and type(rtrn[key]) == "number" then
+						rtrn[key] = rtrn[key] + tonumber(value)
+					elseif tonumber(value) and not rtrn[key] then
+						rtrn[key] = tonumber(value)
+					else
+						rtrn[key] = value
+					end -- as of 2:34:30 on july 8th, 2025 in est (im too lazy to change it to utc this is a big moment), this works on joker_main, and i literally screamed in shock when i saw the xchips. i spent so long on ts and now i now how to do it
+				end
+			end
+			return rtrn
+end
